@@ -1,2 +1,2 @@
-# deforestation_protected_areas
+# Deforestation (tree loss) in protected areas
 Google Earth Engine app
