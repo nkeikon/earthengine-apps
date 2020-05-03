@@ -6,7 +6,7 @@
 // Tree loss from Global Forest Chanage/Hansen data v1.6
 var loss = ee.Image(
   'UMD/hansen/global_forest_change_2018_v1_6'
-  ).select('lossyear');
+).select('lossyear');
 var lossyear = loss.mask(loss);
 var count = lossyear.eq([1, 2, 3, 4, 5,
   6, 7, 8, 9, 10, 11, 12, 13, 14,
@@ -145,7 +145,7 @@ function clearResults() {
     2));
   var instructionsLabel = ui.Label(
     'Annual tree loss in protected areas'
-    );
+  );
   resultsPanel.widgets().reset([
     instructionsLabel
   ]);
@@ -197,7 +197,7 @@ var buttonPanel = ui.Panel(
   [ui.Button('Clear results',
     clearResults)],
   ui.Panel.Layout.Flow(
-  'horizontal'), {
+    'horizontal'), {
     margin: '0 0 0 auto',
     width: '600px',
     height: 'auto'
@@ -287,9 +287,9 @@ Map.onClick(function(coords) {
       label: 'Close',
       onClick: function() {
         inspector
-        .style().set(
-          'shown',
-          false);
+          .style().set(
+            'shown',
+            false);
       }
     }));
   });
