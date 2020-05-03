@@ -5,14 +5,15 @@
 
 1. Simple map showing the map by class
 
-https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map
+    https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map
 
-More information: https://github.com/nkeikon/tanintharyi
+    More information: https://github.com/nkeikon/tanintharyi
 
 2. Added an interactive pie chart showing area size by class
 ![image](https://github.com/nkeikon/earthengine-apps/raw/master/pie.gif)
 
 https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-pie-chart
+
 3. Above in bar chart
 ![image](https://github.com/nkeikon/earthengine-apps/raw/master/bar.gif)
 
