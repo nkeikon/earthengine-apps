@@ -12,22 +12,23 @@
 2. Added an interactive pie chart showing area size by class (`mapPieChart.js`)
 ![image](https://github.com/nkeikon/earthengine-apps/raw/master/pie.gif)
 
-https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-pie-chart
+    https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-pie-chart
 
 3. Above in bar chart (`mapBarChart.js`)
 ![image](https://github.com/nkeikon/earthengine-apps/raw/master/bar.gif)
 
-https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-bar-chart
+    https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-bar-chart
+
 ### Deforestation in protected areas
 Interactive map showing deforestation by year (2001-2018) in protected areas. Data sources are 1) Global Forest Change V1.6 (aka Hansen et al. data); and 2) UNEP-WCMC WDPA (World Database on Protected Area)
 
 `ProtectedAreaLoss.js`
 
-https://code.earthengine.google.com/?accept_repo=users/nkeikon/lossProtectedArea
+https://nkeikon.users.earthengine.app/view/protectedarealoss
 
 https://twitter.com/Keiko_geo/status/1135510020832079875
 
 ### Linked maps showing maps from different periods
-https://twitter.com/Keiko_geo/status/1142930888617005056
-
 https://nkeikon.users.earthengine.app/view/chennai4
+
+https://twitter.com/Keiko_geo/status/1142930888617005056
