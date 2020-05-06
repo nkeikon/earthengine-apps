@@ -1,5 +1,5 @@
 # Google Earth Engine apps
-## Land use/cover map, Tanintharyi, Myanmar 
+## Land use map, Tanintharyi, Myanmar 
 
 Nomura, Keiko, Edward TA Mitchard, Genevieve Patenaude, Joan Bastide, Patrick Oswald, and Thazin Nwe. ["Oil palm concessions in southern Myanmar consist mostly of unconverted forest."](https://www.nature.com/articles/s41598-019-48443-3) Scientific reports 9, no. 1 (2019): 1-9.
 
