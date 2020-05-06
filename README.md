@@ -1,25 +1,27 @@
 ## Google Earth Engine apps
 ### Land use map, Tanintharyi, Myanmar 
 
-Nomura, Keiko, Edward TA Mitchard, Genevieve Patenaude, Joan Bastide, Patrick Oswald, and Thazin Nwe. "Oil palm concessions in southern Myanmar consist mostly of unconverted forest." Scientific reports 9, no. 1 (2019): 1-9.
+Nomura, Keiko, Edward TA Mitchard, Genevieve Patenaude, Joan Bastide, Patrick Oswald, and Thazin Nwe. ["Oil palm concessions in southern Myanmar consist mostly of unconverted forest."](https://www.nature.com/articles/s41598-019-48443-3) Scientific reports 9, no. 1 (2019): 1-9.
 
 1. Simple map showing the map by class (`LandCoverMap.js`)
 
     https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map
 
-    More information: https://github.com/nkeikon/tanintharyi
-
 2. Added an interactive pie chart showing area size by class (`mapPieChart.js`)
 
 ![image](https://github.com/nkeikon/earthengine-apps/raw/master/pie.gif)
 
-    https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-pie-chart
+   https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-pie-chart
 
 3. Above in bar chart (`mapBarChart.js`)
 
 ![image](https://github.com/nkeikon/earthengine-apps/raw/master/bar.gif)
 
-    https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-bar-chart
+   https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-bar-chart
+
+#### Interactive Region Reduction App
+
+https://developers.google.com/earth-engine/tutorials/community/drawing-tools-region-reduction
 
 ### Deforestation in protected areas
 Interactive map showing deforestation by year (2001-2018) in protected areas. Data sources are 1) Global Forest Change V1.6 (aka Hansen et al. data); and 2) UNEP-WCMC WDPA (World Database on Protected Area)
