@@ -146,7 +146,9 @@ Map.add(ui.Panel(
     width: '350px',
     position: 'top-right'
   }));
+
 // Add drawing tool
+// https://developers.google.com/earth-engine/tutorials/community/drawing-tools-region-reduction
 var drawingTools = Map.drawingTools();
 drawingTools.setShown(false);
 while (drawingTools.layers().length() > 0) {
@@ -196,7 +198,8 @@ function chartAreaByClass() {
   // Reduction scale is based on map scale to avoid memory/timeout errors.
   var mapScale = Map.getScale();
   var scale = mapScale > 5000 ? mapScale * 2 : 5000;
-  // Chart NDVI time series for the selected area of interest.
+  // The original tutorial charts NDVI time series.
+  // Here, I created a chart showing area size by class for the polygon.
   var chart = ui.Chart.image
     .byClass({
       image: areaImage,
