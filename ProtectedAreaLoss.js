@@ -4,18 +4,17 @@
 
 // Displays annual tree loss in protected areas
 // Tree loss from Global Forest Chanage/Hansen data v1.6
-var loss = ee.Image(
-  'UMD/hansen/global_forest_change_2018_v1_6'
-).select('lossyear');
-var lossyear = loss.mask(loss);
+var loss = ee.Image("UMD/hansen/global_forest_change_2019_v1_7")
+  .select('lossyear');
+var lossyear = loss.selfMask();
 var count = lossyear.eq([1, 2, 3, 4, 5,
   6, 7, 8, 9, 10, 11, 12, 13, 14,
-  15, 16, 17, 18
+  15, 16, 17, 18, 19
 ]).rename(['2001', '2002', '2003',
   '2004', '2005', '2006', '2007',
   '2008', '2009', '2010', '2011',
   '2012', '2013', '2014', '2015',
-  '2016', '2017', '2018'
+  '2016', '2017', '2018','2019'
 ]);
 var total = count.multiply(ee.Image
   .pixelArea()).divide(10000);
@@ -34,7 +33,7 @@ var protectedAreas = ee
 // Constants used to visualize the data on the map
 var LOSS_STYLE = {
   min: 1,
-  max: 18,
+  max: 19,
   palette: ['red']
 };
 
@@ -90,7 +89,7 @@ function makeResultsBarChart(
     })
     .setChartType('ColumnChart');
   chart.setOptions({
-    title: 'Tree loss (Deforestation) 2001-2018',
+    title: 'Tree loss (Deforestation) 2001-2019',
     vAxis: {
       title: 'hectare'
     },
@@ -145,7 +144,7 @@ function clearResults() {
     2));
   var instructionsLabel = ui.Label(
     'Annual tree loss in protected areas'
-  );
+    );
   resultsPanel.widgets().reset([
     instructionsLabel
   ]);
@@ -197,7 +196,7 @@ var buttonPanel = ui.Panel(
   [ui.Button('Clear results',
     clearResults)],
   ui.Panel.Layout.Flow(
-    'horizontal'), {
+  'horizontal'), {
     margin: '0 0 0 auto',
     width: '600px',
     height: 'auto'
@@ -287,9 +286,9 @@ Map.onClick(function(coords) {
       label: 'Close',
       onClick: function() {
         inspector
-          .style().set(
-            'shown',
-            false);
+        .style().set(
+          'shown',
+          false);
       }
     }));
   });
@@ -337,7 +336,7 @@ var add_legend = function(title, lbl,
 
 var palette = ['red', '26458d'];
 var labels = [
-  'Tree loss/Deforestation (Global Forest Change v1.6)',
+  'Tree loss/Deforestation (Global Forest Change v1.7)',
   'Protected areas (UNEP-WCMC)'
 ];
 add_legend('', labels, palette);
