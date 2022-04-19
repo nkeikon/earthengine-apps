@@ -1,8 +1,8 @@
 /*
  * Displays annual tree loss in protected areas.
  * Tree loss from Global Forest Chanage/Hansen data v1.8.
+ * Protected areas from the WDPA
  */
- 
 var loss = ee.Image("UMD/hansen/global_forest_change_2020_v1_8")
     .select('lossyear');
 var lossyear = loss.selfMask();
@@ -22,13 +22,10 @@ var total = count.multiply(ee.Image
 // Load the protected area layer from the World Database on Protected Areas (WDPA).
 var protectedAreas = ee
     .FeatureCollection(
-        'WCMC/WDPA/current/polygons')
-    .filterMetadata('ORIG_NAME',
-        'not_equals', 'Los Petenes');
+        'WCMC/WDPA/current/polygons');
 
 var PA_outline = ee.Image().byte().paint({
-    featureCollection: ee.FeatureCollection(
-        'WCMC/WDPA/current/polygons'),
+    featureCollection: protectedAreas,
     color: 1,
     width: 3
 });
@@ -36,7 +33,7 @@ var PA_outline = ee.Image().byte().paint({
 /*
  * Visualization and styling
  */
- 
+
 var palette = ["ffffcc", "ffeda0", "fed976", "feb24c", "fd8d3c", "fc4e2a", "e31a1c", "bd0026", "800026"];
 
 var LOSS_STYLE = {
@@ -51,12 +48,13 @@ var PA_STYLE = {
     color: 'FFFFFF',
     fillColor: 'FFFFFF'
 };
+
 var HIGHLIGHT_STYLE = {
     color: '#FF0000',
     fillColor: '#00000000',
 };
 
-// Configure our map with a minimal set of controls
+// Configure our map with a minimal set of controls.
 Map.setControlVisibility(false);
 Map.setControlVisibility({
     scaleControl: true,
@@ -65,8 +63,7 @@ Map.setControlVisibility({
 Map.style().set({
     cursor: 'crosshair'
 });
-
-Map.setCenter(100, 17, 6);
+Map.setCenter(100, 17, 8);
 
 // Add the loss layer. 
 Map.addLayer(loss.mask(loss),
@@ -76,17 +73,17 @@ Map.addLayer(loss.mask(loss),
  * The chart panel in the bottom-right
  */
 
-// A list of points the user has clicked on, as [lon,lat] tuples
+// A list of points the user has clicked on, as [lon,lat] tuples.
 var selectedPoints = [];
 
-// Returns the list of protected areas the user has selected
+// Returns the list of protected areas the user has selected.
 function getSelectedProtectedAreas() {
     return protectedAreas.filterBounds(ee
         .Geometry.MultiPoint(
             selectedPoints));
 }
 
-// Makes a bar chart of the given FeatureCollection of protected areas by name
+// Makes a bar chart of the given FeatureCollection of protected areas by name.
 function makeResultsBarChart(
     protectedAreas) {
     var chart = ui.Chart.image.regions({
@@ -134,7 +131,7 @@ function makeResultsBarChart(
 
 */
 
-// Updates the map overlay using the currently-selected protected area.
+// Update the map overlay using the selected protected area.
 function updateOverlay() {
     var overlay =
         getSelectedProtectedAreas()
@@ -151,8 +148,7 @@ function updateChart() {
         buttonPanel);
 }
 
-// Clears the set of selected points and resets the overlay and results
-// panel to their default state.
+// Clear the selected polygon and reset the overlay and results panel to the default.
 function clearResults() {
     selectedPoints = [];
     Map.layers().remove(Map.layers().get(
@@ -160,7 +156,7 @@ function clearResults() {
     resultsPanel.widgets().reset();
 }
 
-// Register a click handler for the map that adds the clicked point to the
+// Register a click handler for the map that adds the clicked polygon to the
 // list and updates the map overlay and chart accordingly.
 function handleMapClick(location) {
     selectedPoints.push([location.lon,
@@ -186,7 +182,6 @@ function ToggleButton(states, onClick) {
     });
     return button;
 }
-
 
 var chartTypeToggleButton =
     ToggleButton(
@@ -220,29 +215,7 @@ var resultsPanel = ui.Panel({
 Map.add(resultsPanel);
 clearResults();
 
-// Create an inspector panel with a horizontal layout.
-var inspector = ui.Panel({
-    layout: ui.Panel.Layout.flow(
-        'vertical')
-
-});
-
-// Add a label to the panel.
-inspector.add(ui.Label(
-    'Annual Tree Loss in Protected Areas', {
-        fontFamily: 'google sans',
-        fontSize: '18px',
-    })).add(ui.Label("Click 🔲 to select a protected area",{
-      fontFamily:'google sans',
-      fontSize: '16px',
-                margin: '4px 8px',
-                textAlign: 'center',
-                stretch: 'horizontal'
-    }));
-
-// Add the panel to the default map
-Map.add(inspector);
-
+// Change the basemap.
 var baseChange = [{
     featureType: 'all',
     stylers: [{
@@ -263,8 +236,13 @@ Map.setOptions(null, {
 Map.addLayer(PA_outline, {
     palette: 'FFFFFF'
 }, 'edges');
-Map.setCenter(100, 17, 8);
 
+// Create an inspector panel with a horizontal layout.
+var inspector = ui.Panel({
+    layout: ui.Panel.Layout.flow(
+        'vertical')
+
+});
 // Register an onClick handler that populates and shows the inspector panel.
 Map.onClick(function(coords) {
     inspector.clear();
@@ -332,8 +310,22 @@ Map.onClick(function(coords) {
     });
 });
 
+// Add title.
+var title = ui.Label(
+    'Annual Tree Loss in Protected Areas', {
+        fontFamily: 'google sans',
+        fontSize: '18px',
+        margin: '4px 8px',
+    });
+
+var instruction = ui.Label("Click 🔲 to select a protected area", {
+    fontFamily: 'google sans',
+    fontSize: '16px',
+    margin: '4px 8px',
+});
 
 // Add more legends.
+
 var colorbarOptions1 = {
     'min': '2001',
     'max': '2020',
@@ -366,7 +358,7 @@ var colorBar = ui.Thumbnail({
     },
 });
 
-// Create a panel with three numbers for the legend.
+// Create a panel with min & max for the legend.
 var legendLabels = ui.Panel({
     style: {
         position: 'bottom-center'
@@ -395,9 +387,10 @@ var legendLabels = ui.Panel({
 // Create a label and slider.
 var slider = ui.Slider({
     style: {
-        width: '300px',
+        width: '380px',
         height: 'auto',
         padding: '10px',
+        margin: '0px 8px',
         fontFamily: 'google sans'
     }
 });
@@ -408,16 +401,41 @@ slider.onChange(function(value) {
 });
 
 var label = ui.Label('Annual tree loss visibility (1=100%)', {
-    fontFamily: 'google sans'
+    fontFamily: 'google sans',
+    margin: '24px 8px',
 });
+
+// citations and links
+var hansen = ui.Label(
+    'Hansen/UMD/Google/USGS/NASA', {
+        fontFamily: 'google sans',
+        margin: '4px 8px',
+        fontSize: '10px',
+    });
+
+var wdpa = ui.Label("UNEP-WCMC and IUCN, Protected Planet: The World Database on Protected Areas (WDPA)", {
+    fontFamily: 'google sans',
+    fontSize: '10px',
+    margin: '4px 8px',
+    textAlign: 'left',
+    stretch: 'horizontal'
+});
+
+var link = ui.Label('View Code in Github', {
+    fontFamily: 'google sans',
+    fontSize: '11px',
+    margin: '4px 8px',
+    textAlign: 'left',
+    stretch: 'horizontal'
+}, 'https://github.com/nkeikon/earthengine-apps/blob/master/ProtectedAreaLoss.js');
 
 // Create a panel that contains both the slider and the label.
 var panel = ui.Panel({
-    widgets: [label, slider, colorBar, legendLabels],
+    widgets: [title, instruction, label, slider, colorBar, legendLabels],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
         position: 'bottom-left',
-        width: '300px',
+        width: '400px',
         padding: '7px',
         fontFamily: 'google sans'
     }
@@ -425,3 +443,4 @@ var panel = ui.Panel({
 
 // Add the panel to the map.
 Map.add(panel);
+panel.add(hansen).add(wdpa).add(link);
