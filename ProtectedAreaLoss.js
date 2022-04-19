@@ -240,9 +240,21 @@ Map.addLayer(PA_outline, {
 // Create an inspector panel with a horizontal layout.
 var inspector = ui.Panel({
     layout: ui.Panel.Layout.flow(
-        'vertical')
+        'vertical'),
 
 });
+
+// Create an inspector panel with a horizontal layout.	
+var inspector = ui.Panel({layout: ui.Panel.Layout.flow('vertical'),
+    style: {position: 'top-right'}});	
+inspector.add(ui.Label('Protected Area Name, Type, Status, Year', 
+{fontFamily:'google sans', fontSize: '16px'}));
+
+// Add the panel to the default map	
+Map.add(inspector);
+
+
+
 // Register an onClick handler that populates and shows the inspector panel.
 Map.onClick(function(coords) {
     inspector.clear();
@@ -290,7 +302,6 @@ Map.onClick(function(coords) {
             value: info +
                 ' (Name, Type, Status, Year)',
             style: {
-                position: 'top-center',
                 fontFamily: 'google sans',
             }
         }));
@@ -360,9 +371,6 @@ var colorBar = ui.Thumbnail({
 
 // Create a panel with min & max for the legend.
 var legendLabels = ui.Panel({
-    style: {
-        position: 'bottom-center'
-    },
     widgets: [
         ui.Label(colorbarOptions1.min, {
             margin: '4px 8px',
