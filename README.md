@@ -15,8 +15,6 @@ Nomura, Keiko, Edward TA Mitchard, Genevieve Patenaude, Joan Bastide, Patrick Os
 
 3. Above in bar chart
 
-![image](https://github.com/nkeikon/earthengine-apps/raw/master/bar.gif)
-
    https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-with-bar-chart
 
 ### Interactive Region Reduction App
