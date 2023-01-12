@@ -13,7 +13,7 @@ Nomura, Keiko, Edward TA Mitchard, Genevieve Patenaude, Joan Bastide, Patrick Os
 
    https://nkeikon.users.earthengine.app/view/tanintharyi-oil-palm-and-rubber-map-with-pie-chart
 
-3. Above in bar chart `mapBarChart.js`
+3. Above in bar chart
 
 ![image](https://github.com/nkeikon/earthengine-apps/raw/master/bar.gif)
 
