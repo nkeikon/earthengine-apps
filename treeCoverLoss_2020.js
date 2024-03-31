@@ -8,6 +8,7 @@
  * the original author at nkeiko.n@gmail.com     *
  *************************************************/
 
+//datasets (pls note that the spatial resolutions vary)
 var treeCover = ee.ImageCollection('JRC/GFC2020/V1').mosaic();
 var loss = ee.Image("UMD/hansen/global_forest_change_2023_v1_11").select('lossyear');
 var loss_2021 = loss.updateMask(loss.gte(21)).updateMask(treeCover.gt(0));
