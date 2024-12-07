@@ -8,11 +8,26 @@
  * the original author at nkeiko.n@gmail.com     *
  *************************************************/
 
+ee.data.setWorkloadTag('eu_defor_app');
+
+var geometry = 
+    /* color: #23cba7 */
+    /* displayProperties: [
+      {
+        "type": "rectangle"
+      }
+    ] */
+    ee.Geometry.Polygon(
+        [[[100.7072265625, 22.83540592125073],
+          [100.7072265625, 22.022996561477584],
+          [101.5861328125, 22.022996561477584],
+          [101.5861328125, 22.83540592125073]]], null, false);
+          
 // datasets (note that the spatial resolutions vary)
-var treeCover = ee.ImageCollection('JRC/GFC2020/V1').mosaic();
+var treeCover = ee.ImageCollection("JRC/GFC2020/V2").mosaic();
 treeCover = treeCover.setDefaultProjection({
   crs:'EPSG:4326',
-  crsTransform:[0.00008983152841195215,0,-180.00001488697754,0,-0.00008983152841195215,90.00005235925298]
+  scale:10
 });
 var loss = ee.Image("UMD/hansen/global_forest_change_2023_v1_11").select('lossyear');
 var loss_2021 = loss.updateMask(loss.gte(21)).updateMask(treeCover.gt(0));
@@ -230,7 +245,7 @@ var visualization = {
     opacity: 0.5
 };
 
-Map.addLayer(treeCover, visualization, 'EC JRC Global forest cover 2020 – V1');
+Map.addLayer(treeCover, visualization, 'EC JRC Global forest cover 2020 – V2');
 Map.addLayer(loss_2021.selfMask(), {
     palette: 'red',
     opacity: 0.5
@@ -295,7 +310,7 @@ var legend = ui.Panel({
 
 // Create green square for tree label
 var treeLabel = ui.Label({
-    value: '2020 Forest Cover (EC JRC global map of forest cover 2020, V1)',
+    value: '2020 Forest Cover (EC JRC global map of forest cover 2020, V2)',
     style: {
         fontFamily: 'Google Sans',
         fontSize: '15px',
@@ -515,4 +530,4 @@ Map.setControlVisibility({
   zoomControl: true, scaleControl: true, layerList: false, mapTypeControl: true, fullscreenControl: true, drawingToolsControl: false}
   );
 
-Map.setCenter(114.55, 8.84, 4);
+Map.setCenter(114.55, 8.84, 5);
